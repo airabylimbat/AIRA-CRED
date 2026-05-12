@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AIRA-CRED Dashboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:
+    radial-gradient(circle at top left,#063b55,#020617 40%),
+    #020617;
+    color:white;
+    overflow-x:hidden;
+}
+
+.container{
+    display:flex;
+    min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    width:260px;
+    background:rgba(10,20,40,0.65);
+    backdrop-filter:blur(14px);
+    border-right:1px solid rgba(255,255,255,0.08);
+    padding:25px;
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+}
+
+.logo{
+    margin-bottom:40px;
+}
+
+.logo h1{
+    font-size:38px;
+    font-weight:700;
+    color:#13d7ff;
+}
+
+.logo p{
+    font-size:12px;
+    color:#a7b6c9;
+    margin-top:6px;
+    line-height:1.5;
+}
+
+.menu-title{
+    font-size:20px;
+    margin-bottom:20px;
+    color:#7de9ff;
+    font-weight:600;
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.menu a{
+    text-decoration:none;
+    color:white;
+    padding:16px;
+    border-radius:16px;
+    background:rgba(255,255,255,0.05);
+    transition:0.3s;
+    font-weight:500;
+}
+
+.menu a:hover,
+.menu a.active{
+    background:linear-gradient(90deg,#0ea5e9,#06b6d4);
+    transform:translateX(4px);
+    box-shadow:0 0 20px rgba(0,255,255,0.3);
+}
+
+/* MAIN */
+
+.main{
+    margin-left:260px;
+    width:calc(100% - 260px);
+    padding:30px;
+}
+
+/* TOPBAR */
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.search-box{
+    width:350px;
+    background:rgba(255,255,255,0.05);
+    border-radius:16px;
+    padding:14px 18px;
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+.search-box input{
+    width:100%;
+    background:none;
+    border:none;
+    outline:none;
+    color:white;
+    font-size:14px;
+}
+
+.top-right{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.hospital-badge{
+    padding:12px 22px;
+    border-radius:14px;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+.profile{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#06b6d4,#22d3ee);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    font-size:20px;
+    box-shadow:0 0 20px rgba(0,255,255,0.4);
+}
+
+/* HERO */
+
+.hero{
+    background:
+    linear-gradient(135deg,rgba(0,255,255,0.15),rgba(0,40,100,0.4));
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:30px;
+    padding:45px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+    overflow:hidden;
+    position:relative;
+}
+
+.hero::before{
+    content:'';
+    position:absolute;
+    width:400px;
+    height:400px;
+    background:rgba(0,255,255,0.08);
+    border-radius:50%;
+    right:-120px;
+    top:-120px;
+}
+
+.hero-text{
+    width:60%;
+    z-index:2;
+}
+
+.hero-text h2{
+    font-size:56px;
+    line-height:1.2;
+    margin-bottom:18px;
+}
+
+.hero-text p{
+    color:#cbd5e1;
+    line-height:1.8;
+    margin-bottom:28px;
+    font-size:18px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:16px;
+}
+
+.btn{
+    padding:16px 28px;
+    border:none;
+    border-radius:16px;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.btn-primary{
+    background:linear-gradient(90deg,#06b6d4,#0ea5e9);
+    color:white;
+    box-shadow:0 0 20px rgba(0,255,255,0.3);
+}
+
+.btn-secondary{
+    background:rgba(255,255,255,0.08);
+    color:white;
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+/* AI CIRCLE */
+
+.ai-circle{
+    width:280px;
+    height:280px;
+    border-radius:50%;
+    border:1px solid rgba(0,255,255,0.2);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,30,80,0.35);
+    position:relative;
+    z-index:2;
+    animation:pulse 3s infinite;
+}
+
+.ai-circle h1{
+    font-size:82px;
+    color:#0ff;
+}
+
+.ai-circle p{
+    font-size:22px;
+    color:#dbeafe;
+}
+
+@keyframes pulse{
+    0%{
+        box-shadow:0 0 10px rgba(0,255,255,0.2);
+    }
+    50%{
+        box-shadow:0 0 40px rgba(0,255,255,0.4);
+    }
+    100%{
+        box-shadow:0 0 10px rgba(0,255,255,0.2);
+    }
+}
+
+/* CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:22px;
+    margin-bottom:30px;
+}
+
+.card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:26px;
+    padding:28px;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-4px);
+    border-color:#06b6d4;
+}
+
+.card-title{
+    color:#b6c5d9;
+    margin-bottom:16px;
+    font-size:15px;
+}
+
+.card-number{
+    font-size:52px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.green{color:#00ff95;}
+.red{color:#ff5d5d;}
+.orange{color:#ff9f1a;}
+.cyan{color:#0ff;}
+
+.card-sub{
+    color:#b7c9da;
+}
+
+/* GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:24px;
+    margin-bottom:30px;
+}
+
+.panel{
+    background:rgba(255,255,255,0.05);
+    border-radius:28px;
+    border:1px solid rgba(255,255,255,0.08);
+    padding:28px;
+}
+
+.panel-title{
+    font-size:34px;
+    margin-bottom:24px;
+    color:#68e8ff;
+}
+
+.reminder{
+    background:rgba(255,0,80,0.08);
+    border:1px solid rgba(255,0,80,0.12);
+    padding:18px;
+    border-radius:18px;
+    margin-bottom:16px;
+}
+
+.reminder h4{
+    margin-bottom:6px;
+}
+
+.upload-box{
+    border:2px dashed rgba(0,255,255,0.3);
+    border-radius:24px;
+    padding:45px 20px;
+    text-align:center;
+}
+
+.upload-box p{
+    color:#b6c5d9;
+    margin-top:10px;
+}
+
+/* TABLE */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+table th{
+    text-align:left;
+    padding:16px;
+    color:#7de9ff;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+table td{
+    padding:16px;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+.status{
+    padding:8px 14px;
+    border-radius:999px;
+    font-size:13px;
+    display:inline-block;
+}
+
+.valid{
+    background:rgba(0,255,100,0.15);
+    color:#00ff95;
+}
+
+.expired{
+    background:rgba(255,0,0,0.15);
+    color:#ff6767;
+}
+
+.warning{
+    background:rgba(255,166,0,0.15);
+    color:#ffb84d;
+}
+
+/* ANALYTICS */
+
+.analytics{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+}
+
+.analytics-card{
+    background:rgba(255,255,255,0.05);
+    padding:26px;
+    border-radius:24px;
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+.analytics-card h3{
+    margin-bottom:18px;
+    color:#7de9ff;
+}
+
+.analytics-card ul{
+    padding-left:20px;
+    line-height:2;
+    color:#cbd5e1;
+}
+
+/* FOOTER */
+
+.footer{
+    margin-top:50px;
+    text-align:center;
+    color:#8aa1b7;
+    padding-bottom:30px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1200px){
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        flex-direction:column;
+        gap:40px;
+        text-align:center;
+    }
+
+    .hero-text{
+        width:100%;
+    }
+}
+
+@media(max-width:900px){
+
+    .sidebar{
+        display:none;
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+    }
+
+    .hero-text h2{
+        font-size:42px;
+    }
+
+    .analytics{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h1>AIRA-CRED</h1>
+            <p>
+                Artificial Intelligence for Rapid and Accurate Credentialing
+            </p>
+        </div>
+
+        <div class="menu-title">Menu</div>
+
+        <div class="menu">
+            <a href="#" class="active">Dashboard</a>
+            <a href="#">Credentialing</a>
+            <a href="#">STR / SIP</a>
+            <a href="#">AI Verification</a>
+            <a href="#">AI Analytics</a>
+            <a href="#">QR Credential</a>
+            <a href="#">Smart Reminder</a>
+            <a href="#">Reports</a>
+            <a href="#">Settings</a>
+        </div>
+
+    </aside>
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <!-- TOPBAR -->
+
+        <div class="topbar">
+
+            <div class="search-box">
+                <input type="text" placeholder="Cari tenaga kesehatan, STR, SIP..." />
+            </div>
+
+            <div class="top-right">
+                <div class="hospital-badge">
+                    RS Universitas Airlangga
+                </div>
+
+                <div class="profile">
+                    A
+                </div>
+            </div>
+
+        </div>
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="hero-text">
+
+                <h2>
+                    Smart Credentialing Dashboard
+                </h2>
+
+                <p>
+                    Sistem Kredensial Digital Berbasis AI untuk meningkatkan efisiensi,
+                    keamanan, akurasi, dan patient safety di RS Universitas Airlangga.
+                </p>
+
+                <div class="hero-buttons">
+                    <button class="btn btn-primary">
+                        Upload Dokumen
+                    </button>
+
+                    <button class="btn btn-secondary">
+                        Generate QR
+                    </button>
+
+                    <button class="btn btn-secondary">
+                        AI Verification
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="ai-circle">
+                <h1>AI</h1>
+                <p>Credential System</p>
+            </div>
+
+        </section>
+
+        <!-- CARDS -->
+
+        <section class="cards">
+
+            <div class="card">
+                <div class="card-title">Total Credential</div>
+                <div class="card-number cyan">1,254</div>
+                <div class="card-sub green">↑ 12% bulan ini</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">STR Expired Soon</div>
+                <div class="card-number red">18</div>
+                <div class="card-sub orange">Perlu tindakan segera</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">AI Verification Accuracy</div>
+                <div class="card-number green">98%</div>
+                <div class="card-sub cyan">AI screening active</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Pending Review</div>
+                <div class="card-number orange">32</div>
+                <div class="card-sub">Menunggu komite</div>
+            </div>
+
+        </section>
+
+        <!-- GRID -->
+
+        <section class="grid">
+
+            <!-- REMINDER -->
+
+            <div class="panel">
+
+                <div class="panel-title">
+                    AI Smart Reminder
+                </div>
+
+                <div class="reminder">
+                    <h4>STR dr. Andi akan habis 30 hari</h4>
+                    <p>Segera lakukan re-kredensial</p>
+                </div>
+
+                <div class="reminder">
+                    <h4>Sertifikat ACLS Perawat ICU expired</h4>
+                    <p>Upload sertifikat terbaru</p>
+                </div>
+
+                <div class="reminder">
+                    <h4>10 STR dokter akan habis dalam 60 hari</h4>
+                    <p>AI predictive monitoring aktif</p>
+                </div>
+
+            </div>
+
+            <!-- UPLOAD -->
+
+            <div class="panel">
+
+                <div class="panel-title">
+                    Upload Credential
+                </div>
+
+                <div class="upload-box">
+                    <h3>Upload Dokumen</h3>
+                    <p>
+                        STR • SIP • Sertifikat • Logbook
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- TABLE -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                AI Document Checker
+            </div>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Dokumen</th>
+                        <th>Status</th>
+                        <th>Keterangan</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>STR</td>
+                        <td><span class="status valid">Valid</span></td>
+                        <td>Masa berlaku aktif</td>
+                    </tr>
+
+                    <tr>
+                        <td>SIP</td>
+                        <td><span class="status valid">Valid</span></td>
+                        <td>Terverifikasi AI</td>
+                    </tr>
+
+                    <tr>
+                        <td>ACLS</td>
+                        <td><span class="status expired">Expired</span></td>
+                        <td>Upload sertifikat terbaru</td>
+                    </tr>
+
+                    <tr>
+                        <td>Logbook</td>
+                        <td><span class="status warning">Incomplete</span></td>
+                        <td>Data belum lengkap</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <br><br>
+
+        <!-- ANALYTICS -->
+
+        <section class="analytics">
+
+            <div class="analytics-card">
+
+                <h3>Predictive AI Analytics</h3>
+
+                <ul>
+                    <li>15 perawat ICU perlu re-kredensial bulan depan</li>
+                    <li>10 STR dokter akan habis dalam 60 hari</li>
+                    <li>Unit ICU memiliki risiko keterlambatan tertinggi</li>
+                    <li>AI mendeteksi kebutuhan pelatihan SDM</li>
+                </ul>
+
+            </div>
+
+            <div class="analytics-card">
+
+                <h3>AI Clinical Privilege Assistant</h3>
+
+                <ul>
+                    <li>ACLS aktif</li>
+                    <li>Ventilator training completed</li>
+                    <li>ICU logbook lengkap</li>
+                    <li><strong>Eligible for ICU Clinical Privilege</strong></li>
+                </ul>
+
+            </div>
+
+        </section>
+
+        <!-- FOOTER -->
+
+        <div class="footer">
+            AIRA-CRED © 2026 | Smart Credentialing for Smart Hospital
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>
