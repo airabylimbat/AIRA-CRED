@@ -1,3 +1,4 @@
 import { app } from './firebase-config.js';
 
-alert("AIRA-CRED Firebase Connected");
+document.querySelector(".hero-text p").innerHTML =
+"🔥 Firebase Connected Successfully";
