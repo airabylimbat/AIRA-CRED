@@ -1,3 +1,3 @@
 import { app } from './firebase-config.js';
 
-console.log("AIRA-CRED Firebase Connected");
+alert("AIRA-CRED Firebase Connected");
