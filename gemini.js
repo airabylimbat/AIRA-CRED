@@ -1,4 +1,4 @@
-const API_KEY = "PASTE_API_KEY_GEMINI";
+const API_KEY = "AIzaSyB6-YbUBSiIgYtVw_827uYoCgTjkTFhv44";
 
 async function askGemini(prompt){
 
