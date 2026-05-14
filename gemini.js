@@ -1,4 +1,4 @@
-const API_KEY = "AIzaSyB6-YbUBSiIgYtVw_827uYoCgTjkTFhv44";
+const API_KEY = "AIzaSyBJ14J0sFw1JMgKMGli_wlzrpYkPJ839gU";
 
 async function askGemini(prompt){
 
