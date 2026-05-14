@@ -1,16 +1,22 @@
-import { app } from './firebase-config.js';
-import { askGemini } from './gemini.js';
-
-console.log("AIRA-CRED Firebase Connected");
-
 async function testAI(){
 
-    const result = await askGemini(
-        "Apa fungsi sistem kredensial rumah sakit?"
-    );
+    try{
 
-    console.log(result);
+        const result = await askGemini(
+            "Buat slogan singkat untuk sistem kredensial rumah sakit berbasis AI"
+        );
+
+        document.getElementById("aiResult").innerHTML = result;
+
+    }catch(error){
+
+        document.getElementById("aiResult").innerHTML =
+        "⚠ Gemini quota limit / API belum aktif penuh";
+
+        console.log(error);
+
+    }
 
 }
 
-// testAI();
+testAI();
